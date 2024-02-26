@@ -1,5 +1,5 @@
 from uuid import uuid4
-from datetime import datetime
+from datetime import date, datetime
 
 
 class BaseModel:
@@ -16,8 +16,8 @@ class BaseModel:
                     setattr(self, key, value)
         else:   
             self.id = str(uuid4())
-            self.created_at = datetime.now().isoformat()
-            self.updated_at = datetime.now().isoformat()
+            self.created_at = datetime.now() 
+            self.updated_at = datetime.now()
 
     def save(self) -> None:
         self.updated_at = datetime.now().isoformat()
