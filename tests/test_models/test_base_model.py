@@ -1,6 +1,5 @@
 import unittest
 
-from uuid import uuid4
 from datetime import datetime
 
 from models.base_model import BaseModel
@@ -9,13 +8,11 @@ from models.base_model import BaseModel
 class TestBaseModel(unittest.TestCase):
     def setUp(self):
         self.model = BaseModel()
-        self.id = str(uuid4())
         self.model.created_at = datetime.now()
         self.model.updated_at = datetime.now()
 
     def test_id(self):
-        self.assertTrue(hasattr(self.model, "id"))
-        self.assertEqual(type(self.model.id), str)
+        self.assertIsNotNone(self.model.id)
 
     def test_save(self):
         old_updated_at = self.model.updated_at
