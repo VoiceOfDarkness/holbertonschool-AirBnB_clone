@@ -12,7 +12,8 @@ class TestBaseModel(unittest.TestCase):
         self.model.updated_at = datetime.now()
 
     def test_id(self):
-        self.assertIsNotNone(self.model.id)
+        self.model_test = BaseModel()
+        self.assertNotEqual(self.model.id, self.model_test.id)
 
     def test_save(self):
         old_updated_at = self.model.updated_at
