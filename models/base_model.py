@@ -3,21 +3,10 @@ from datetime import datetime
 
 
 class BaseModel:
-    def __init__(self, *args, **kwargs) -> None:
-        if kwargs:
-            for key, value in kwargs.items():
-                if key == "created_at" or key == "updated_at":
-                    setattr(
-                        self,
-                        key,
-                        datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"),
-                    )
-                elif key != "__class__":
-                    setattr(self, key, value)
-        else:   
-            self.id = str(uuid4())
-            self.created_at = str(datetime.now().isoformat())
-            self.updated_at = str(datetime.now().isoformat())
+    def __init__(self) -> None:
+        self.id = str(uuid4())
+        self.created_at = datetime.now().isoformat()
+        self.updated_at = datetime.now().isoformat()
 
     def save(self) -> None:
         self.updated_at = datetime.now().isoformat()
