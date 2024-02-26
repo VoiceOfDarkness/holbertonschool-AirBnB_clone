@@ -1,4 +1,6 @@
 import unittest
+
+from uuid import uuid4
 from datetime import datetime
 
 from models.base_model import BaseModel
@@ -7,6 +9,7 @@ from models.base_model import BaseModel
 class TestBaseModel(unittest.TestCase):
     def setUp(self):
         self.model = BaseModel()
+        self.id = str(uuid4())
         self.model.created_at = datetime.now()
         self.model.updated_at = datetime.now()
 
