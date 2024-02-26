@@ -25,7 +25,7 @@ class BaseModel:
     def to_dict(self):
         result = self.__dict__.copy()
         result["__class__"] = self.__class__.__name__
-        return result
+        return str(result)
 
     def __str__(self) -> str:
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
