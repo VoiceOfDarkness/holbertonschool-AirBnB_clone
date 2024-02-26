@@ -10,6 +10,10 @@ class TestBaseModel(unittest.TestCase):
         self.model.created_at = datetime.now()
         self.model.updated_at = datetime.now()
 
+    def test_id(self):
+        self.assertTrue(hasattr(self.model, "id"))
+        self.assertEqual(type(self.model.id), str)
+
     def test_save(self):
         old_updated_at = self.model.updated_at
         self.model.save()
