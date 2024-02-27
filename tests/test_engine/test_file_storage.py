@@ -1,0 +1,23 @@
+import os
+import unittest
+
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+
+
+def file_exists(file_name):
+    return os.path.exists(file_name)
+
+
+class TestFileStorage(unittest.TestCase):
+    def setUp(self):
+        self.storage = FileStorage()
+        self.storage.reload()
+    
+    def test_all(self):
+        obj1 = BaseModel()
+        obj2 = BaseModel()
+        self.storage.new(obj1)
+        self.storage.new(obj2)
+
+        self.assertEqual(self.storage.all(), {"BaseModel.1": obj1, "BaseModel.2": obj2})
