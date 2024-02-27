@@ -68,19 +68,25 @@ class HBNBCommand(cmd.Cmd):
 
         try:
             class_name, instance_id = line.split()
-            instance = storage.all()[class_name + "." + instance_id]
-            if instance:
-                del storage.all()[class_name + "." + instance_id]
-                storage.save()
+
+            if line.split()[0] not in self.__class_names:
+                print("** class doesn't exist **")
             else:
-                print("** no instance found **")
-        except ValueError:
+                instance_key = class_name + "." + instance_id
+                all_instances = storage.all()
+
+                if instance_key not in all_instances:
+                    print("** no instance found **")
+                else:
+                    del all_instances[instance_key]
+                    storage.save()
+        except (ValueError, KeyError):
             if not line:
                 print("** class name missing **")
+            elif line.split()[0] not in self.__class_names:
+                print("** class doesn't exist **")
             else:
                 print("** instance id missing **")
-        except KeyError:
-            print("** class doesn't exist **")
 
     def do_all(self, line: str) -> None:
         from models import storage
