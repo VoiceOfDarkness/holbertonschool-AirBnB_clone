@@ -100,29 +100,30 @@ class HBNBCommand(cmd.Cmd):
 
         try:
             class_name, instance_id = line.split()[0], line.split()[1]
-            instance_key = class_name + "." + instance_id
-            all_instances = storage.all()
-
-            if instance_key not in all_instances:
-                print("** no instance found **")
+            
+            if class_name not in self.__class_names:
+                print("** class doesn't exist **")
             else:
-                instance = all_instances[instance_key]
-                attribute = line.split()[2]
-                value = line.split()[3]
-                setattr(instance, attribute, value)
-                instance.save()
+                instance_key = class_name + "." + instance_id
+                all_instances = storage.all()
+
+                if instance_key not in all_instances:
+                    print("** no instance found **")
+                else:
+                    instance = all_instances[instance_key]
+                    attribute = line.split()[2]
+                    value = line.split()[3]
+                    setattr(instance, attribute, value)
+                    instance.save()
         except (KeyError, IndexError):
             if not line:
                 print("** class name missing **")
-            elif line.split()[0] not in self.__class_names:
-                print("** class doesn't exist **")
             elif len(line.split()) == 1:
                 print("** instance id missing **")
             elif len(line.split()) == 2:
                 print("** attribute name missing **")
             else:
                 print("** value missing **")
-
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
