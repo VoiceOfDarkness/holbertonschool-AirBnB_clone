@@ -103,7 +103,7 @@ class HBNBCommand(cmd.Cmd):
                 value = line.split()[3]
                 setattr(instance, attribute, value)
                 instance.save()
-        except ValueError:
+        except KeyError:
             if not line:
                 print("** class name missing **")
             elif len(line.split()) == 1:
