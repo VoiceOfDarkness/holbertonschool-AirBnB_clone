@@ -114,6 +114,8 @@ class HBNBCommand(cmd.Cmd):
         except (KeyError, IndexError):
             if not line:
                 print("** class name missing **")
+            elif line.split()[0] not in self.__class_names:
+                print("** class doesn't exist **")
             elif len(line.split()) == 1:
                 print("** instance id missing **")
             elif len(line.split()) == 2:
