@@ -1,4 +1,5 @@
 import cmd
+"""Console for executing commands"""
 
 
 class HBNBCommand(cmd.Cmd):
