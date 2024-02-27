@@ -20,11 +20,10 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         old_updated_at = self.model.updated_at
-        old_storage_updated_at = self.storage.all()[f"BaseModel.{self.model.id}"].updated_at
         self.model.save()
         self.assertNotEqual(old_updated_at, self.model.updated_at)
-        new_strage_updated_at = self.storage.all()[f"BaseModel.{self.model.id}"].updated_at
-        self.assertNotEqual(old_storage_updated_at, new_strage_updated_at)
+        with open("file.json", "r") as file:
+            self.assertIn("BaseModel.{}".format(self.model.id), file.read())
 
     def test_to_dict(self):
         result = self.model.to_dict()
