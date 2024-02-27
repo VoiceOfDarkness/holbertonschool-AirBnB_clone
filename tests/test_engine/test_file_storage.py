@@ -1,30 +1,42 @@
-import os
 import unittest
-
+import os
+import json
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
-
-def file_exists(file_name):
-    return os.path.exists(file_name)
-
-
 class TestFileStorage(unittest.TestCase):
+
     def setUp(self):
         self.storage = FileStorage()
-        self.storage.reload()
-        self.base = BaseModel()
-    
+        self.obj = BaseModel()
+        self.obj.name = "Test"
+        self.obj.number = 30
+
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
+
     def test_all(self):
-        obj = self.storage.all()
-        self.assertEqual(type(obj), dict)
-        self.assertIs(obj, FileStorage._FileStorage__objects)
-        self.assertEqual(len(obj), 7)
+        self.storage.new(self.obj)
+        self.assertEqual(len(self.storage.all()), 1)
 
     def test_new(self):
-        """Test new method."""
-        bm = BaseModel()
-        self.storage.new(bm)
-        store = FileStorage._FileStorage__objects
-        self.assertIn("BaseModel." + bm.id, store.keys())
-        self.assertIn(self.base, store.values())
+        self.storage.new(self.obj)
+        self.assertIn('BaseModel.' + self.obj.id, self.storage.all())
+
+    def test_save(self):
+        self.storage.new(self.obj)
+        self.storage.save()
+        with open("file.json", 'r') as f:
+            objects = json.load(f)
+        self.assertIn('BaseModel.' + self.obj.id, objects)
+
+    def test_reload(self):
+        self.storage.new(self.obj)
+        self.storage.save()
+        self.storage._FileStorage__objects = {}
+        self.storage.reload()
+        self.assertIn('BaseModel.' + self.obj.id, self.storage.all())
+
