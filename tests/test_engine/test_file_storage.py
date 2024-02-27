@@ -16,7 +16,9 @@ class TestFileStorage(unittest.TestCase):
     
     def test_all(self):
         obj1 = BaseModel()
+        obj1.id = "1"
         obj2 = BaseModel()
+        obj2.id = "2"
         self.storage.new(obj1)
         self.storage.new(obj2)
 
