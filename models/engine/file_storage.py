@@ -9,7 +9,7 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        self.__objects[obj.id] = obj
+        self.__objects[obj.id] = obj.to_dict()
 
     def save(self):
         with open(self.__file_path, "w") as file:
