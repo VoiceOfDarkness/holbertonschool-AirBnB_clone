@@ -19,7 +19,5 @@ class TestFileStorage(unittest.TestCase):
         obj1.id = "1"
         obj2 = BaseModel()
         obj2.id = "2"
-        self.storage.new(obj1)
-        self.storage.new(obj2)
 
         self.assertEqual(self.storage.all(), {"BaseModel.1": obj1, "BaseModel.2": obj2})
