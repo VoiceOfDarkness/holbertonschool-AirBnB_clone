@@ -41,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             class_name, instance_id = line.split()
             instance = storage.all()[class_name + "." + instance_id]
-            if instance:
+            if not instance:
                 print(instance)
             else:
                 print("** no instance found **")
