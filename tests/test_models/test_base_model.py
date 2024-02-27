@@ -3,6 +3,7 @@ import unittest
 from datetime import datetime
 
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class TestBaseModel(unittest.TestCase):
@@ -10,6 +11,8 @@ class TestBaseModel(unittest.TestCase):
         self.model = BaseModel()
         self.model.created_at = datetime.now()
         self.model.updated_at = datetime.now()
+        self.storage = FileStorage()
+        self.storage.reload()
 
     def test_id(self):
         self.model_test = BaseModel()
@@ -17,8 +20,11 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         old_updated_at = self.model.updated_at
+        old_storage_updated_at = self.storage.all()[f"BaseModel.{self.model.id}"].updated_at
         self.model.save()
         self.assertNotEqual(old_updated_at, self.model.updated_at)
+        new_strage_updated_at = self.storage.all()[f"BaseModel.{self.model.id}"].updated_at
+        self.assertNotEqual(old_storage_updated_at, new_strage_updated_at)
 
     def test_to_dict(self):
         result = self.model.to_dict()
