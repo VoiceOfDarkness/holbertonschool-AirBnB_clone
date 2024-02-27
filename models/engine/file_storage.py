@@ -9,16 +9,23 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        self.__objects[obj.id] = obj.to_dict()
+        self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
 
     def save(self):
+        temp = {}
+        for key, value in self.__objects.items():
+            temp.update({key: value.to_dict()})
+        json_file = json.dumps(temp)
         with open(self.__file_path, "w") as file:
-            file.write(json.dumps(self.__objects))
+            file.write(json_file)
 
     def reload(self):
         try:
             with open(self.__file_path, "r") as file:
-                self.__objects = json.load(file)
+                for elem in json.load(file).values():
+                    name = elem["__class__"]
+                    del elem["__class__"]
+                    self.new(eval(name)(**elem))
+
         except FileNotFoundError as e:
-            with open(self.__file_path, "w") as file:
-                pass
+            pass
