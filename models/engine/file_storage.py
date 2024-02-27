@@ -1,5 +1,5 @@
 import json
-from models.base_model import BaseModel
+from ..base_model import BaseModel
 
 
 class FileStorage:
@@ -25,6 +25,5 @@ class FileStorage:
             with open(self.__file_path, "r") as file:
                 json_file = json.load(file)
                 self.__objects = {key: BaseModel(**value) for key, value in json_file.items()}
-
         except:
             pass
