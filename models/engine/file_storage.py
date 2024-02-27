@@ -16,6 +16,9 @@ class FileStorage:
             file.write(json.dumps(self.__objects))
 
     def reload(self):
-        with open(self.__file_path, "r") as file:
-            self.__objects = json.load(file)
-
+        try:
+            with open(self.__file_path, "r") as file:
+                self.__objects = json.load(file)
+        except FileNotFoundError as e:
+            with open(self.__file_path, "w") as file:
+                pass
