@@ -90,22 +90,16 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, line: str) -> None:
         from models import storage
 
-        try:
+        all_instances = storage.all()
+        if not line:
+            print([str(val) for val in all_instances.values()])
+        else:
             class_name = line.split()[0]
             if class_name not in self.__class_names:
                 print("** class doesn't exist **")
             else:
-                all_instances = storage.all()
-                class_instances = [
-                    str(val)
-                    for key, val in all_instances.items()
-                    if key.startswith(class_name + ".")
-                ]
-
+                class_instances = [str(val) for val in all_instances.values()]
                 print(class_instances)
-        except IndexError:
-            if not line:
-                print("** class name missing **")
 
     def do_update(self, line: str) -> None:
         from models import storage
