@@ -1,4 +1,5 @@
 import json
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -9,7 +10,7 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
+        self.__objects[f"{type(obj).__name__}.{obj.id}"] = obj
 
     def save(self):
         temp = {}
@@ -19,13 +20,11 @@ class FileStorage:
         with open(self.__file_path, "w") as file:
             file.write(json_file)
 
-     def reload(self):
-            json_file = ""
-            try:
-                with open(FileStorage.__file_path, "r") as my_file:
-                    json_file = json.loads(my_file.read())
-                    for key in json_file:
-                        FileStorage.__objects[key] = my_dict[json_file[key]['__clas\
-    s__']](**json_file[key])
-            except:
-                pass
+    def reload(self):
+        try:
+            with open(self.__file_path, "r") as file:
+                json_file = json.load(file)
+                self.__objects = {key: BaseModel(**value) for key, value in json_file.items()}
+
+        except:
+            pass
