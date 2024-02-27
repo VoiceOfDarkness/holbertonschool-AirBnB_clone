@@ -18,6 +18,12 @@ class TestFileStorage(unittest.TestCase):
         except FileNotFoundError:
             pass
 
+
+    def test_file_path(self):
+        self.storage.new(self.obj)
+        self.storage.save()
+        self.assertTrue(os.path.exists(self.storage._FileStorage__file_path))
+
     def test_all(self):
         self.storage.new(self.obj)
         self.assertEqual(len(self.storage.all()), 1)
