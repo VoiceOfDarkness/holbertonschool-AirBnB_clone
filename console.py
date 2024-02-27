@@ -8,6 +8,9 @@ from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
+    __class_names = [
+        "BaseModel",
+    ]
 
     def do_EOF(self, line: str) -> bool:
         """EOF command to exit the program"""
@@ -41,17 +44,18 @@ class HBNBCommand(cmd.Cmd):
         try:
             class_name, instance_id = line.split()
             instance = storage.all()[class_name + "." + instance_id]
-            if instance:
-                print(instance)
-            else:
+
+            if not instance:
                 print("** no instance found **")
+            else:
+                print(instance)
         except ValueError:
             if not line:
                 print("** class name missing **")
+            elif line.split()[0] not in self.__class_names:
+                print("** class doesn't exist **")
             else:
-                print("** instance id missing **")
-        except KeyError:
-            print("** class doesn't exist **")
+                print("** instance id missing **") 
 
     def do_destroy(self, line: str) -> None:
         from models import storage
