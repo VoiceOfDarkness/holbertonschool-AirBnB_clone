@@ -94,9 +94,9 @@ class HBNBCommand(cmd.Cmd):
         from models import storage
 
         try:
-            class_name, isinstance_id = line.split()
+            class_name, isinstance_id = line.split()[0], line.split()[1]
             instance = storage.all()[class_name + "." + isinstance_id]
-            if instance:
+            if not instance:
                 print("** no instance found **")
             else:
                 attribute = line.split()[2]
