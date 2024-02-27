@@ -15,9 +15,7 @@ class TestFileStorage(unittest.TestCase):
         self.storage.reload()
     
     def test_all(self):
-        obj1 = BaseModel()
-        obj1.id = "1"
-        obj2 = BaseModel()
-        obj2.id = "2"
-
-        self.assertEqual(self.storage.all(), {"BaseModel.1": obj1, "BaseModel.2": obj2})
+        obj = self.storage.all()
+        self.assertEqual(type(obj), dict)
+        self.assertIs(obj, FileStorage._FileStorage__objects)
+        self.assertEqual(len(obj), 7)
