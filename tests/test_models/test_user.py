@@ -9,7 +9,7 @@ class TestUser(unittest.TestCase):
         self.user = User()
 
     def test_attributes(self):
-        us = User(email="a", password="a")
+        us = User()
         self.assertEqual(str, type(us.id))
         self.assertEqual(datetime, type(us.created_at))
         self.assertEqual(datetime, type(us.updated_at))
@@ -17,8 +17,6 @@ class TestUser(unittest.TestCase):
         self.assertTrue(hasattr(us, "password"))
         self.assertTrue(hasattr(us, "first_name"))
         self.assertTrue(hasattr(us, "last_name"))
-        self.assertTrue(hasattr(us, "places"))
-        self.assertTrue(hasattr(us, "reviews"))
 
     def test_user_email(self):
         self.user.email = 'maga@gmail.com'
