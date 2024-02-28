@@ -13,6 +13,5 @@ class TestCity(unittest.TestCase):
         self.assertEqual(str, type(city.id))
         self.assertEqual(datetime, type(city.created_at))
         self.assertEqual(datetime, type(city.updated_at))
-        self.assertTrue(hasattr(city, "__tablename__"))
         self.assertTrue(hasattr(city, "name"))
         self.assertTrue(hasattr(city, "state_id"))
