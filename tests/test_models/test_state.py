@@ -9,8 +9,8 @@ class Teststate(unittest.TestCase):
         self.user = State()
 
     def test_attributes(self):
-        state = State()
-        self.assertEqual(str, type(state.id))
-        self.assertEqual(datetime, type(state.created_at))
-        self.assertEqual(datetime, type(state.updated_at))
-        self.assertTrue(hasattr(state, "name"))
+        st = State()
+        self.assertEqual(str, type(st.id))
+        self.assertEqual(datetime, type(st.created_at))
+        self.assertEqual(datetime, type(st.updated_at))
+        self.assertTrue(hasattr(st, "name"))
