@@ -1,15 +1,16 @@
 #!/usr/bin/python3
 """Console for executing commands"""
 import cmd
-import json
 
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     __class_names = [
         "BaseModel",
+        "User",
     ]
 
     def do_EOF(self, line: str) -> bool:
@@ -26,17 +27,17 @@ class HBNBCommand(cmd.Cmd):
         return False
 
     def do_create(self, line: str) -> None:
-        from models import storage
-
-        if not line:
-            print("** class name missing **")
-        else:
-            try:
-                instance = eval(line)()
+        try:
+            class_name = line.split()[0]
+            
+            if class_name not in self.__class_names:
+                print("** class doesn't exist **")
+            else:
+                instance = eval(class_name)()
                 instance.save()
                 print(instance.id)
-            except NameError:
-                print("** class doesn't exist **")
+        except NameError:
+                print("** class name missing **")
 
     def do_show(self, line: str) -> None:
         from models import storage
