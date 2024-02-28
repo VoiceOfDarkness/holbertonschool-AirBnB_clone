@@ -9,7 +9,7 @@ class TestUser(unittest.TestCase):
         self.user = User()
 
     def test_attributes(self):
-        us = User()
+        us = User(email="Something", id="100", password="12345")
         self.assertEqual(str, type(us.id))
         self.assertEqual(datetime, type(us.created_at))
         self.assertEqual(datetime, type(us.updated_at))
