@@ -1,11 +1,26 @@
 import unittest
 
 from models.user import User
+from datetime import datetime
 
 
 class TestUser(unittest.TestCase):
     def setUp(self) -> None:
         self.user = User()
+
+    def test_attributes(self):
+        """Check for attributes."""
+        us = User(email="a", password="a")
+        self.assertEqual(str, type(us.id))
+        self.assertEqual(datetime, type(us.created_at))
+        self.assertEqual(datetime, type(us.updated_at))
+        self.assertTrue(hasattr(us, "__tablename__"))
+        self.assertTrue(hasattr(us, "email"))
+        self.assertTrue(hasattr(us, "password"))
+        self.assertTrue(hasattr(us, "first_name"))
+        self.assertTrue(hasattr(us, "last_name"))
+        self.assertTrue(hasattr(us, "places"))
+        self.assertTrue(hasattr(us, "reviews"))
 
     def test_user_email(self):
         self.user.email = 'maga@gmail.com'
