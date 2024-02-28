@@ -6,7 +6,7 @@ from models.state import State
 
 class Teststate(unittest.TestCase):
     def setUp(self) -> None:
-        self.user = State()
+        self.state = State()
 
     def test_attributes(self):
         st = State()
