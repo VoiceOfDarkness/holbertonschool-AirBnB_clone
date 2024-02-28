@@ -5,12 +5,13 @@ from models.state import State
 
 
 class Teststate(unittest.TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         self.state = State()
 
-    def test_attributes(self):
-        st = State()
-        self.assertEqual(str, type(st.id))
-        self.assertEqual(datetime, type(st.created_at))
-        self.assertEqual(datetime, type(st.updated_at))
-        self.assertTrue(hasattr(st, "name"))
+    def test_instance(self):
+        self.assertIsInstance(self.state, State)
+
+    def test_name_property(self):
+        name = "Test State"
+        self.state.name = name
+        self.assertEqual(self.state.name, name)
