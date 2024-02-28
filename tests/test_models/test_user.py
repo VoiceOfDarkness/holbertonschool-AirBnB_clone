@@ -4,18 +4,16 @@ Unittest for the User class
 Test files by using the following command line:
 python3 -m unittest tests/test_models/test_user.py
 """
-import unittest
-import pep8
-from os import path, remove
 import datetime
+from os import path, remove
+import unittest
+
+import pep8
+
 import models
-# from models import base_model
 from models import user
-# from models.base_model import BaseModel
-from models.user import User
-# from models import engine
-# from models.engine import file_storage
 from models.engine.file_storage import FileStorage
+from models.user import User
 
 
 class TestUser(unittest.TestCase):
