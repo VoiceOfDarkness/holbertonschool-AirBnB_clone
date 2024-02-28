@@ -57,8 +57,6 @@ class HBNBCommand(cmd.Cmd):
         except (ValueError, KeyError):
             if not line:
                 print("** class name missing **")
-            elif line.split()[0] not in self.__class_names:
-                print("** class doesn't exist **")
             else:
                 print("** instance id missing **")
 
