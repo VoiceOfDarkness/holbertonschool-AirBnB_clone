@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 import unittest
 
 from models.user import User
@@ -9,7 +9,7 @@ class TestUser(unittest.TestCase):
         self.user = User()
 
     def test_attributes(self):
-        us = User(email="Something", id="100", password="12345")
+        us = User(email="Something", id="100", password="12345", created_at=datetime.now(), updated_at=datetime.now())
         self.assertEqual(str, type(us.id))
         self.assertEqual(datetime, type(us.created_at))
         self.assertEqual(datetime, type(us.updated_at))
