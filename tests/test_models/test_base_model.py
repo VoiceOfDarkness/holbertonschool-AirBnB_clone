@@ -33,5 +33,7 @@ class TestBaseModel(unittest.TestCase):
                          self.model.updated_at.isoformat())
 
     def test_str(self):
-        expected_str = "[{}] ({}) {}".format(self.model.__class__.__name__, self.model.id, self.model.__dict__)
+        expected_str = "[{}] ({}) {}".format(self.model.__class__.__name__,
+                                             self.model.id,
+                                             self.model.__dict__)
         self.assertEqual(str(self.model), expected_str)
