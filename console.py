@@ -39,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line: str) -> None:
         try:
             class_name = line.split()[0]
-            
+
             if class_name not in self.__class_names:
                 print("** class doesn't exist **")
             else:
@@ -47,7 +47,7 @@ class HBNBCommand(cmd.Cmd):
                 instance.save()
                 print(instance.id)
         except NameError:
-                print("** class name missing **")
+            print("** class name missing **")
 
     def do_show(self, line: str) -> None:
         from models import storage
