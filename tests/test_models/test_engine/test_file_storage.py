@@ -20,7 +20,6 @@ class TestFileStorage(unittest.TestCase):
         except FileNotFoundError:
             pass
 
-
     def test_file_path(self):
         self.storage.new(self.obj)
         self.storage.save()
@@ -47,4 +46,3 @@ class TestFileStorage(unittest.TestCase):
         self.storage._FileStorage__objects = {}
         self.storage.reload()
         self.assertIn('BaseModel.' + self.obj.id, self.storage.all())
-

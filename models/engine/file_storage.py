@@ -19,6 +19,7 @@ classes = {
     "Review": Review
 }
 
+
 class FileStorage:
     __file_path = "file.json"
     __objects = {}
@@ -37,8 +38,6 @@ class FileStorage:
     def reload(self):
         try:
             with open(self.__file_path, 'r') as f:
-                # Requirements: 1. Get class name (__class__ attribute from json)
-                #  self.__objects = {k: classes[](**v) for k, v in json.load(f).items()}
                 for key, value in json.load(f).items():
                     class_name = value["__class__"]
                     self.__objects.update({key: classes[class_name](**value)})
