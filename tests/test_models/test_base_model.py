@@ -10,8 +10,6 @@ class TestBaseModel(unittest.TestCase):
         self.model = BaseModel()
         self.model.created_at = datetime.now()
         self.model.updated_at = datetime.now()
-        self.storage = FileStorage()
-        self.storage.reload()
 
     def test_id(self):
         self.model_test = BaseModel()
