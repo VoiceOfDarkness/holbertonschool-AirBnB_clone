@@ -1,7 +1,10 @@
+"""This module contains Place model"""
 from models.base_model import BaseModel
 
 
 class Place(BaseModel):
+    """Place model"""
+
     city_id = ""
     user_id = ""
     name = ""
