@@ -5,7 +5,7 @@ Test files by using the following command line:
 python3 -m unittest tests/test_models/test_review.py
 """
 import unittest
-import pep8
+import pycodestyle
 from os import path, remove
 import datetime
 import models
@@ -47,10 +47,10 @@ class TestReview(unittest.TestCase):
         if path.exists("file.json"):
             remove("file.json")
 
-    def test_pep8_conformance(self):
-        """Test that Review conforms to PEP8"""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/review.py'])
+    def test_pycodestyle_conformance(self):
+        """Test that Review conforms to pycodestyle"""
+        pycodestylestyle = pycodestyle.StyleGuide(quiet=True)
+        result = pycodestylestyle.check_files(['models/review.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
