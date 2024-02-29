@@ -8,7 +8,7 @@ import datetime
 from os import path, remove
 import unittest
 
-import pep8
+import pycodestyle
 
 import models
 from models import user
@@ -47,10 +47,10 @@ class TestUser(unittest.TestCase):
         if path.exists("file.json"):
             remove("file.json")
 
-    def test_pep8_conformance(self):
-        """Test that User conforms to PEP8"""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/user.py'])
+    def test_pycodestyle_conformance(self):
+        """Test that User conforms to pycodestyle"""
+        pycodestylestyle = pycodestyle.StyleGuide(quiet=True)
+        result = pycodestylestyle.check_files(['models/user.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 

@@ -4,18 +4,16 @@ Unittest for the State class
 Test files by using the following command line:
 python3 -m unittest tests/test_models/test_state.py
 """
-import unittest
-import pep8
-from os import path, remove
 import datetime
+from os import path, remove
+import unittest
+
+import pycodestyle
+
 import models
-# from models import base_model
 from models import state
-# from models.base_model import BaseModel
-from models.state import State
-# from models import engine
-# from models.engine import file_storage
 from models.engine.file_storage import FileStorage
+from models.state import State
 
 
 class TestState(unittest.TestCase):
@@ -43,10 +41,10 @@ class TestState(unittest.TestCase):
         if path.exists("file.json"):
             remove("file.json")
 
-    def test_pep8_conformance(self):
-        """Test that State conforms to PEP8"""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/state.py'])
+    def test_pycodestyle_conformance(self):
+        """Test that State conforms to pycodestyle"""
+        pycodestylestyle = pycodestyle.StyleGuide(quiet=True)
+        result = pycodestylestyle.check_files(['models/state.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
