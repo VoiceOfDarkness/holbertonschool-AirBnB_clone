@@ -3,7 +3,15 @@ from datetime import datetime
 
 
 class BaseModel:
+    """Base Model to create models"""
+
     def __init__(self, *args, **kwargs) -> None:
+        """
+        __init__ - initialization method
+        Args:
+            args: args
+            kwargs: kwargs
+        """
         from models import storage
 
         if kwargs:
@@ -23,11 +31,17 @@ class BaseModel:
             storage.new(self)
 
     def save(self) -> None:
+        """
+        save - updates upodated_at argument and saves it to storage
+        """
         from models import storage
         self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
+        """
+        to__dict - returns the dictionary representation of instance
+        """
         result = self.__dict__.copy()
         result["__class__"] = self.__class__.__name__
         result["created_at"] = self.created_at.isoformat()
@@ -35,4 +49,7 @@ class BaseModel:
         return result
 
     def __str__(self) -> str:
+        """
+        __str__ - string representation of instance
+        """
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
