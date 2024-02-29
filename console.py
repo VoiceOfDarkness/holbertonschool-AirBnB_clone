@@ -46,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
                 instance = eval(class_name)()
                 instance.save()
                 print(instance.id)
-        except NameError:
+        except (NameError, IndexError):
             print("** class name missing **")
 
     def do_show(self, line: str) -> None:
