@@ -157,6 +157,9 @@ class HBNBCommand(cmd.Cmd):
             elif user_input[1].startswith('show'):
                 instance_id = user_input[1].split('(')[1].split(')')[0]
                 self.do_show(user_input[0] + ' ' + instance_id)
+            elif user_input[1].startswith('destroy'):
+                instance_id = user_input[1].split('(')[1].split(')')[0]
+                self.do_destroy(user_input[0] + ' ' + instance_id)
         except IndexError:
             print("*** Unknown syntax: {}".format(line))
 
