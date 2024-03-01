@@ -54,11 +54,12 @@ class HBNBCommand(cmd.Cmd):
         from models import storage
 
         try:
-            class_name, instance_id = line.split()
+            class_name = line.split()[0]
 
             if line.split()[0] not in self.__class_names:
                 print("** class doesn't exist **")
             else:
+                instance_id = line.split()[1]
                 instance_key = class_name + "." + instance_id
                 all_instances = storage.all()
 
@@ -66,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
                 else:
                     print(all_instances[instance_key])
-        except (ValueError, KeyError):
+        except (IndexError, KeyError):
             if not line:
                 print("** class name missing **")
             else:
