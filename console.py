@@ -141,10 +141,21 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
 
     def default(self, line: str) -> None:
+        from models import storage
+
         user_input = line.split('.')
 
-        if user_input[1] == 'all()':
-            self.do_all(user_input[0])
+        try:
+            if user_input[1] == 'all()':
+                self.do_all(user_input[0])
+            elif user_input[1] == 'count()':
+                count = 0
+                for key in storage.all().keys():
+                    if user_input[0] in key:
+                        count += 1
+                print(count)
+        except IndexError:
+            print("*** Unknown syntax: {}".format(line))
 
 
 if __name__ == "__main__":
