@@ -154,6 +154,9 @@ class HBNBCommand(cmd.Cmd):
                     if user_input[0] in key:
                         count += 1
                 print(count)
+            elif user_input[1].startswith('show'):
+                instance_id = user_input[1].split('(')[1].split(')')[0]
+                self.do_show(user_input[0] + ' ' + instance_id)
         except IndexError:
             print("*** Unknown syntax: {}".format(line))
 
