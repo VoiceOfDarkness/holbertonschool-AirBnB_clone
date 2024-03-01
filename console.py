@@ -160,6 +160,23 @@ class HBNBCommand(cmd.Cmd):
             elif user_input[1].startswith('destroy'):
                 instance_id = user_input[1].split('(')[1].split(')')[0]
                 self.do_destroy(user_input[0] + ' ' + instance_id)
+            elif user_input[1].startswith("update"):
+                update_context = user_input[1].split("(")[1].split(")")[0]
+                values = update_context.split(", ")
+
+                instance_id = values[0].strip('"')
+                attribute_name = values[1].strip('"')
+                attribute_value = values[2].strip('"')
+
+                self.do_update(
+                    user_input[0]
+                    + " "
+                    + instance_id
+                    + " "
+                    + attribute_name
+                    + " "
+                    + attribute_value
+                )
         except IndexError:
             print("*** Unknown syntax: {}".format(line))
 
