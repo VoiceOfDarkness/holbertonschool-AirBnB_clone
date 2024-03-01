@@ -140,6 +140,12 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** value missing **")
 
+    def default(self, line: str) -> None:
+        user_input = line.split('.')
+
+        if user_input[1] == 'all()':
+            self.do_all(user_input[0])
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
