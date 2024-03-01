@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Console for executing commands"""
 import cmd
+import json
 
 from models.base_model import BaseModel
 from models.user import User
@@ -143,40 +144,58 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line: str) -> None:
         from models import storage
 
-        user_input = line.split('.')
+        user_input = line.split(".")
 
         try:
-            if user_input[1] == 'all()':
+            if user_input[1] == "all()":
                 self.do_all(user_input[0])
-            elif user_input[1] == 'count()':
+            elif user_input[1] == "count()":
                 count = 0
                 for key in storage.all().keys():
                     if user_input[0] in key:
                         count += 1
                 print(count)
-            elif user_input[1].startswith('show'):
-                instance_id = user_input[1].split('(')[1].split(')')[0]
-                self.do_show(user_input[0] + ' ' + instance_id)
-            elif user_input[1].startswith('destroy'):
-                instance_id = user_input[1].split('(')[1].split(')')[0]
-                self.do_destroy(user_input[0] + ' ' + instance_id)
+            elif user_input[1].startswith("show"):
+                instance_id = user_input[1].split("(")[1].split(")")[0]
+                self.do_show(user_input[0] + " " + instance_id)
+            elif user_input[1].startswith("destroy"):
+                instance_id = user_input[1].split("(")[1].split(")")[0]
+                self.do_destroy(user_input[0] + " " + instance_id)
             elif user_input[1].startswith("update"):
-                update_context = user_input[1].split("(")[1].split(")")[0]
-                values = update_context.split(", ")
 
-                instance_id = values[0].strip('"')
-                attribute_name = values[1].strip('"')
-                attribute_value = values[2].strip('"')
+                if "{" in user_input[1] and "}" in user_input[1]:
+                    update_context = user_input[1].replace("'", '"')
+                    instance_id = update_context.split("(")[1].split(",")[0].strip('"')
+                    dict_start = update_context.find("{")
+                    dict_end = update_context.find("}") + 1
+                    update_context = json.loads(update_context[dict_start:dict_end])
 
-                self.do_update(
-                    user_input[0]
-                    + " "
-                    + instance_id
-                    + " "
-                    + attribute_name
-                    + " "
-                    + attribute_value
-                )
+                    for key, value in update_context.items():
+                        self.do_update(
+                            user_input[0]
+                            + " "
+                            + instance_id
+                            + " "
+                            + key
+                            + " "
+                            + str(value)
+                        )
+                else:
+                    update_context = user_input[1].split("(")[1].split(")")[0]
+                    values = update_context.split(", ")
+                    instance_id = values[0].strip('"')
+                    attribute_name = values[1].strip('"')
+                    attribute_value = values[2].strip('"')
+
+                    self.do_update(
+                        user_input[0]
+                        + " "
+                        + instance_id
+                        + " "
+                        + attribute_name
+                        + " "
+                        + str(attribute_value)
+                    )
         except IndexError:
             print("*** Unknown syntax: {}".format(line))
 
