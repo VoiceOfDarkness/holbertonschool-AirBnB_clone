@@ -25,7 +25,7 @@ class HBNBCommand(cmd.Cmd):
     ]
 
     def do_EOF(self, line: str) -> bool:
-        """EOF command to exit the program"""
+        """EOF command to exit the program\n"""
 
         return True
 
@@ -35,9 +35,14 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self) -> bool:
+        """Called when an empty line is entered in response to the prompt\n"""
+
         return False
 
     def do_create(self, line: str) -> None:
+        """Create a new instance of BaseModel,
+        save it (to the JSON file) and print the id\n"""
+
         try:
             class_name = line.split()[0]
 
@@ -51,6 +56,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_show(self, line: str) -> None:
+        """Show the string representation of an instance
+        based on the class name and id\n"""
+
         from models import storage
 
         try:
@@ -74,6 +82,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
 
     def do_destroy(self, line: str) -> None:
+        """Deletes an instance based on the class
+        name and id (save the change into the JSON file)\n"""
+
         from models import storage
 
         try:
@@ -99,6 +110,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
 
     def do_all(self, line: str) -> None:
+        """Prints all string representation of all
+        instances based or not on the class name\n"""
+
         from models import storage
 
         all_instances = storage.all()
@@ -113,6 +127,9 @@ class HBNBCommand(cmd.Cmd):
                 print(class_instances)
 
     def do_update(self, line: str) -> None:
+        """Updates an instance based on the class name andid by
+        adding or updating attribute (save the change into the JSON file)\n"""
+
         from models import storage
 
         try:
@@ -143,6 +160,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
 
     def default(self, line: str) -> None:
+        """Called on an input line when the
+        command prefix is not recognized\n"""
+
         from models import storage
 
         user_input = line.split(".")
@@ -166,10 +186,12 @@ class HBNBCommand(cmd.Cmd):
 
                 if "{" in user_input[1] and "}" in user_input[1]:
                     update_context = user_input[1].replace("'", '"')
-                    instance_id = update_context.split("(")[1].split(",")[0].strip('"')
+                    instance_id = update_context.split("(")[1]\
+                                                .split(",")[0].strip('"')
                     dict_start = update_context.find("{")
                     dict_end = update_context.find("}") + 1
-                    update_context = json.loads(update_context[dict_start:dict_end])
+                    update_context = json.\
+                        loads(update_context[dict_start:dict_end])
 
                     for key, value in update_context.items():
                         self.do_update(
