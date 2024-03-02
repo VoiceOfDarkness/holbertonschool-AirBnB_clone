@@ -120,7 +120,7 @@ $ ./console.py
 ** class doesn't exist **
 ```
 
-### show
+#### show
 
 - Usage: show `<class> <id>` or `<class>.show(<id>)`
   Prints the string representation of a class instance based on a given id.
