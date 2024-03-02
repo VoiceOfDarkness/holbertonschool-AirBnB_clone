@@ -1,8 +1,7 @@
 <p align="center">
- <h1 align="center"> AirBnB clone </h1>
+ <h1 align="center"> AirBnB clone - The console </h1>
  <a href="" rel="noopener">
  <img src="https://github.com/bdbaraban/AirBnB_clone_v2/raw/master/assets/hbnb_logo.png"
- <h3 align="center">AirBnB clone - The console</h3>
 
 <div align="center">
 
