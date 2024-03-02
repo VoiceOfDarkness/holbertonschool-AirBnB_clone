@@ -1,9 +1,7 @@
 <p align="center">
  <h1 align="center"> AirBnB clone </h1>
  <a href="" rel="noopener">
- <img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240302%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240302T072625Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=84087678a588765d1632da62b07f894d52198c680089319e93ec9f0a5c1ae82b" alt="Project logo"></a>
-</p>
-
+ <img src="https://github.com/bdbaraban/AirBnB_clone_v2/raw/master/assets/hbnb_logo.png"
 <h3 align="center">AirBnB clone - The console</h3>
 
 <div align="center">
