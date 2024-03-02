@@ -27,7 +27,7 @@
 
 The purpose of this project is to develop a command-line interpreter tailored for managing objects within an AirBnB-like application. By creating this interpreter, users can efficiently create, store, retrieve, update, and delete various entities such as users, states, cities, and places, all from the convenience of their terminal. The project encompasses the implementation of a robust object-oriented structure, with a parent class (BaseModel) handling fundamental functionalities like initialization and serialization. Through a streamlined serialization flow, the interpreter seamlessly converts object instances to dictionaries, JSON strings, and ultimately to files, ensuring efficient storage and retrieval of application data.
 
-![](https://imgur.com/a/g2IiyyF)
+![](https://github.com/VoiceOfDarkness/holbertonschool-AirBnB_clone/blob/main/assets/815046647d23428a14ca.png?raw=true)
 
 This project serves as the foundation for the larger goal of building a fully functional AirBnB clone web application. By establishing a solid groundwork including object classes, serialization mechanisms, and storage engines, future phases of the project such as HTML/CSS templating, database integration, API development, and front-end implementation can be built upon with ease. Additionally, comprehensive unit tests are provided to validate the functionality of each component, ensuring the reliability and robustness of the application throughout its development lifecycle. Ultimately, this project aims to deliver a powerful yet user-friendly tool for managing AirBnB-like data, laying the groundwork for a seamless and immersive web experience for both hosts and guests.
 
