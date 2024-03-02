@@ -35,6 +35,11 @@ class TestConsoleClass(unittest.TestCase):
         except FileNotFoundError:
             pass
 
+    def test_do_quit(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertTrue(HBNBCommand().onecmd("quit"))
+            self.assertEqual(f.getvalue(), '')
+
     def test_executable_file(self):
         """ Check if file have permissions to execute"""
         # Check for read access
