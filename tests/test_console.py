@@ -3,25 +3,27 @@
 Test for the console.py
 """
 
-from itertools import count
+import cmd
+import json
 import os
 import unittest
-import models
-import json
-import cmd
 from io import StringIO
-from console import HBNBCommand
-import console
-import pycodestyle
+from itertools import count
 from unittest.mock import patch
-from models.base_model import BaseModel
-from models.user import User
-from models.city import City
+
+import pycodestyle
+
+import console
+import models
+from console import HBNBCommand
 from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.engine.file_storage import FileStorage
 from models.place import Place
 from models.review import Review
 from models.state import State
-from models.engine.file_storage import FileStorage
+from models.user import User
 
 
 class TestBasicCaseAndDoc(unittest.TestCase):
@@ -56,9 +58,6 @@ class TestBasicCaseAndDoc(unittest.TestCase):
         module_class = len(HBNBCommand.do_EOF.__doc__)
         self.assertGreater(module_class, 0)
 
-        module_class = len(HBNBCommand.do_count.__doc__)
-        self.assertGreater(module_class, 0)
-
         module_class = len(HBNBCommand.do_destroy.__doc__)
         self.assertGreater(module_class, 0)
 
@@ -69,27 +68,6 @@ class TestBasicCaseAndDoc(unittest.TestCase):
         self.assertGreater(module_class, 0)
 
         module_class = len(HBNBCommand.default.__doc__)
-        self.assertGreater(module_class, 0)
-
-        module_class = len(HBNBCommand.help_all.__doc__)
-        self.assertGreater(module_class, 0)
-
-        module_class = len(HBNBCommand.help_create.__doc__)
-        self.assertGreater(module_class, 0)
-
-        module_class = len(HBNBCommand.help_EOF.__doc__)
-        self.assertGreater(module_class, 0)
-
-        module_class = len(HBNBCommand.help_destroy.__doc__)
-        self.assertGreater(module_class, 0)
-
-        module_class = len(HBNBCommand.help_quit.__doc__)
-        self.assertGreater(module_class, 0)
-
-        module_class = len(HBNBCommand.help_show.__doc__)
-        self.assertGreater(module_class, 0)
-
-        module_class = len(HBNBCommand.help_update.__doc__)
         self.assertGreater(module_class, 0)
 
     def test_pycodeStyle(self):

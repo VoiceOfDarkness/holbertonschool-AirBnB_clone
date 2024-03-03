@@ -3,16 +3,20 @@
 import cmd
 import json
 
+from models.amenity import Amenity
 from models.base_model import BaseModel
-from models.user import User
 from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
-from models.amenity import Amenity
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
+    """
+    HBNBCommand class for the command line interpreter\n
+    """
+
     prompt = "(hbnb) "
     __class_names = [
         "BaseModel",
@@ -133,11 +137,13 @@ class HBNBCommand(cmd.Cmd):
         from models import storage
 
         try:
-            class_name, instance_id = line.split()[0], line.split()[1]
+            class_name = line.split()[0]
 
             if class_name not in self.__class_names:
                 print("** class doesn't exist **")
             else:
+                instance_id = line.split()[1]
+
                 instance_key = class_name + "." + instance_id
                 all_instances = storage.all()
 
