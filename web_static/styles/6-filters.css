@@ -50,7 +50,7 @@ button:hover {
   width: 25%;
 }
 .popover {
-  visibility: visible;
+  visibility: hidden;
   width: 100%;
   border: 1px solid #dddddd;
   border-radius: 4px;
